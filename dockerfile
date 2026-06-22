@@ -77,9 +77,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 WORKDIR /
 RUN debootstrap --variant=minbase trixie /rootfs http://deb.debian.org/debian/
 
-RUN --mount=type=cache,target=/rootfs/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/rootfs/var/lib/apt/lists,sharing=locked \
-    rm -f /rootfs/etc/apt/apt.conf.d/docker-clean && \
+RUN rm -f /rootfs/etc/apt/apt.conf.d/docker-clean && \
     chroot /rootfs apt-get update && chroot /rootfs apt-get install -y --allow-downgrades --no-install-recommends \
     acl=${ACL_VER} \
     attr=${ATTR_VER} \
@@ -111,9 +109,7 @@ RUN --mount=type=cache,target=/rootfs/var/cache/apt,sharing=locked \
     tzdata=${TZDATA_VER} \
     zlib1g=${ZLIB1G_VER}
 
-RUN --mount=type=cache,target=/rootfs/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/rootfs/var/lib/apt/lists,sharing=locked \
-    chroot /rootfs apt-get update && chroot /rootfs apt-get dist-upgrade -y
+RUN chroot /rootfs apt-get update && chroot /rootfs apt-get dist-upgrade -y
 
 RUN sed -i 's/umask 022/umask 027/g' /rootfs/etc/profile && \
     sed -i 's/umask 002/umask 027/g' /rootfs/etc/profile && \
