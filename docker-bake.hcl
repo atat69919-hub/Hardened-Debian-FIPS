@@ -1,3 +1,15 @@
+variable "REGISTRY" {
+  default = "ghcr.io"
+}
+
+variable "OWNER" {
+  default = "atat69919-hub"
+}
+
+variable "REPO_NAME" {
+  default = "debian-13-fips"
+}
+
 group "default" {
   targets = ["debian-fips"]
 }
@@ -5,10 +17,13 @@ group "default" {
 target "debian-fips" {
   context    = "."
   dockerfile = "Dockerfile"
-  tags       = ["debian-openssl-fips:latest"]
   platforms  = ["linux/amd64", "linux/arm64"]
   cache-from = ["type=gha,scope=trixie-fips"]
   cache-to   = ["type=gha,scope=trixie-fips,mode=max"]
+  tags       = [
+    "${REGISTRY}/${OWNER}/${REPO_NAME}:latest",
+    "${REGISTRY}/${OWNER}/${REPO_NAME}:${CORE_VERSION}"
+  ]
   args = {
     BASE_IMAGE          = "${BASE_IMAGE}"
     FIPS_VERSION        = "${FIPS_VERSION}"
