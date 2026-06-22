@@ -203,7 +203,27 @@ COPY --from=fips-builder /src/openssl-${FIPS_VERSION}/providers/fips.so /usr/lib
 RUN /usr/bin/openssl fipsinstall \
     -module /usr/lib/ossl-modules/fips.so \
     -out /etc/ssl/fipsmodule.cnf \
-    -self_test_onload
+    -self_test_onload \
+    -pedantic \
+    -hmac_key_check \
+    -kmac_key_check \
+    -hkdf_digest_check \
+    -hkdf_key_check \
+    -kbkdf_key_check \
+    -tls13_kdf_digest_check \
+    -tls13_kdf_key_check \
+    -tls1_prf_digest_check \
+    -tls1_prf_key_check \
+    -no_drbg_truncated_digests \
+    -tdes_encrypt_disabled \
+    -signature_digest_check \
+    -rsa_pkcs15_padding_disabled \
+    -rsa_pss_saltlen_check \
+    -rsa_sign_x931_disabled \
+    -dsa_sign_disabled \
+    -ecdh_cofactor_check \
+    -ems_check \
+    -no_short_mac
 
 RUN cat <<'EOF' > /etc/ssl/openssl.cnf
 config_diagnostics = 1
