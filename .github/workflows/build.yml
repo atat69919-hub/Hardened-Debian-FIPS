@@ -1,0 +1,35 @@
+name: Build Multi-Platform Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-fips-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push with Bake
+        uses: docker/bake-action@v5
+        with:
+          files: |
+            docker-bake.hcl
+            versions.hcl
+          set: |
+            *.platform=linux/amd64,linux/arm64
+            *.cache-from=type=gha,scope=trixie-fips
+            *.cache-to=type=gha,scope=trixie-fips,mode=max

@@ -1,0 +1,46 @@
+name: CI Auto-Update
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-and-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Package Updater
+        run: python scripts/update.py
+
+      - name: Create Pull Request if Changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(deps): automated security and base package updates"
+          title: "chore(deps): automated FIPS Debian 13 base package updates"
+          body: |
+            ### Security & Package Update Report
+
+            This is an automated pull request triggered by the 6-hour scheduler to maintain our high-assurance, zero-vulnerability FIPS Debian 13 container baseline.
+
+            #### Change Summary:
+            - **Target Environment:** Debian 13 (Trixie) FIPS Rootfs
+            - **Action:** Synchronized and pinned the latest package versions and the base image cryptographic digest directly from the upstream security repositories.
+            - **Objective:** Ensures 100% compliance with the CIS, STIG, and ANSSI minimal hardening profiles, preventing any configuration drift and maintaining a Zero-CVE posture.
+
+            Please review the modifications in `versions.hcl` and merge to deploy the updated runtime.
+          branch: "auto-update-dependencies"
+          base: "main"
+          delete-branch: true

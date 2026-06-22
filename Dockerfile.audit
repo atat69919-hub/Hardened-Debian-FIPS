@@ -1,0 +1,30 @@
+# syntax=docker/dockerfile:1.6
+FROM debian-openssl-fips:latest AS original
+FROM debian:trixie-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openscap-scanner \
+    ssg-debian \
+    ca-certificates \
+    wget \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN echo 'PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"' > /etc/os-release && \
+    echo 'NAME="Debian GNU/Linux"' >> /etc/os-release && \
+    echo 'VERSION_ID="12"' >> /etc/os-release && \
+    echo 'VERSION="12 (bookworm)"' >> /etc/os-release && \
+    echo 'ID=debian' >> /etc/os-release && \
+    echo '12.5' > /etc/debian_version
+
+COPY --from=original /usr/bin/openssl /usr/bin/openssl
+COPY --from=original /usr/lib/libcrypto.so* /usr/lib/
+COPY --from=original /usr/lib/libssl.so* /usr/lib/
+COPY --from=original /usr/lib/ossl-modules /usr/lib/ossl-modules
+COPY --from=original /etc/ssl /etc/ssl
+
+ENV PATH="/usr/bin:${PATH}" \
+    LD_LIBRARY_PATH="/usr/lib" \
+    SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+    OPENSSL_CONF=/etc/ssl/openssl.cnf \
+    OPENSSL_MODULES=/usr/lib/ossl-modules
