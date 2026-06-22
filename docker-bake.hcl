@@ -3,11 +3,11 @@ variable "REGISTRY" {
 }
 
 variable "OWNER" {
-  default = "taha2samy"
+  default = "atat69919-hub"
 }
 
 variable "REPO_NAME" {
-  default = "debian-openssl-fips"
+  default = "debian-fips"
 }
 
 group "default" {
