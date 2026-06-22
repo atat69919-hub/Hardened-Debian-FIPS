@@ -127,9 +127,7 @@ RUN mkdir -p /rootfs/root && \
     echo 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"' >> /rootfs/root/.bashrc && \
     echo 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"' >> /rootfs/root/.profile
 
-RUN --mount=type=cache,target=/rootfs/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/rootfs/var/lib/apt/lists,sharing=locked \
-    chroot /rootfs apt-get purge -y --auto-remove --allow-remove-essential \
+RUN chroot /rootfs apt-get purge -y --auto-remove --allow-remove-essential \
     apt \
     libapt-pkg7.0
 
