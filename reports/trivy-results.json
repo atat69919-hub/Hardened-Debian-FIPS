@@ -1,0 +1,195 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.71.2"
+  },
+  "ReportID": "019ef151-183f-7068-a594-ba5bfd017b25",
+  "CreatedAt": "2026-06-22T21:51:24.223031081Z",
+  "ArtifactID": "sha256:0512bbda44b4d0e121c257a3caec4bea5e402440d0f76c54da08b9bbac1cd984",
+  "ArtifactName": "debian-openssl-fips:latest",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "Size": 129057280,
+    "OS": {
+      "Family": "debian",
+      "Name": "13.5"
+    },
+    "ImageID": "sha256:e47232dffe50d2fd063861a372f894be5da7a394e55f2dadf4c6654565075f40",
+    "DiffIDs": [
+      "sha256:922a5a00d724ecaf36d2d0f812e1340313ce7715b2b4629e4d90bcc32e4ade8e",
+      "sha256:890818d8ed4454dcc1646d7ae3425940af9a6633eac483a2c938ed01d18ed9f0",
+      "sha256:7c49d014132defe1491efd2745d37ce2242d9cfbd6ca43fbf899caea4de718d0",
+      "sha256:1453f8f5a866ef093536258a812ace63ef047262c29de7fbede65b2114e6e83d",
+      "sha256:a692fb1f0232a7582f4e0ff486519fd8c2e38fc61f5451a03dadd73bbf543c5b",
+      "sha256:c15228f7af52f8d47ad97e29a4a8883c4d3a51234dbadde49b8cb93c50d64bd2",
+      "sha256:6d18d5bc55e8eabc9b3e0d814640091c379d29c32f5cf7048c8db8bdf394161d",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+    ],
+    "RepoTags": [
+      "debian-openssl-fips:latest"
+    ],
+    "RepoDigests": [
+      "debian-openssl-fips@sha256:e47232dffe50d2fd063861a372f894be5da7a394e55f2dadf4c6654565075f40"
+    ],
+    "Reference": "debian-openssl-fips:latest",
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2026-06-22T20:54:59.72318536Z",
+      "history": [
+        {
+          "created": "2026-06-22T20:40:52Z",
+          "created_by": "COPY /rootfs / # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:58Z",
+          "created_by": "COPY /usr/bin/openssl /usr/bin/openssl # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "COPY /usr/lib/libcrypto.so* /usr/lib/ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "COPY /usr/lib/libssl.so* /usr/lib/ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "COPY /usr/lib/ossl-modules /usr/lib/ossl-modules # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "COPY /etc/ssl /etc/ssl # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "RUN /bin/sh -c groupadd -g 10001 sslgroup \u0026\u0026     useradd -u 10001 -g sslgroup -m -s /bin/bash ssluser # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "ENV PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:/lib SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt OPENSSL_CONF=/etc/ssl/openssl.cnf OPENSSL_MODULES=/usr/lib/ossl-modules",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "USER ssluser",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "WORKDIR /home/ssluser",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "HEALTHCHECK \u0026{[\"CMD\" \"/usr/bin/openssl\" \"list\" \"-providers\"] \"30s\" \"3s\" \"2s\" \"0s\" '\\x03'}",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2026-06-22T20:54:59Z",
+          "created_by": "ENTRYPOINT [\"/bin/sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:922a5a00d724ecaf36d2d0f812e1340313ce7715b2b4629e4d90bcc32e4ade8e",
+          "sha256:890818d8ed4454dcc1646d7ae3425940af9a6633eac483a2c938ed01d18ed9f0",
+          "sha256:7c49d014132defe1491efd2745d37ce2242d9cfbd6ca43fbf899caea4de718d0",
+          "sha256:1453f8f5a866ef093536258a812ace63ef047262c29de7fbede65b2114e6e83d",
+          "sha256:a692fb1f0232a7582f4e0ff486519fd8c2e38fc61f5451a03dadd73bbf543c5b",
+          "sha256:c15228f7af52f8d47ad97e29a4a8883c4d3a51234dbadde49b8cb93c50d64bd2",
+          "sha256:6d18d5bc55e8eabc9b3e0d814640091c379d29c32f5cf7048c8db8bdf394161d",
+          "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+        ]
+      },
+      "config": {
+        "Healthcheck": {
+          "Test": [
+            "CMD",
+            "/usr/bin/openssl",
+            "list",
+            "-providers"
+          ],
+          "Interval": 30000000000,
+          "Timeout": 3000000000,
+          "StartPeriod": 2000000000,
+          "Retries": 3
+        },
+        "Entrypoint": [
+          "/bin/sh"
+        ],
+        "Env": [
+          "PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:/lib",
+          "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt",
+          "OPENSSL_CONF=/etc/ssl/openssl.cnf",
+          "OPENSSL_MODULES=/usr/lib/ossl-modules"
+        ],
+        "User": "ssluser",
+        "WorkingDir": "/home/ssluser"
+      }
+    },
+    "Layers": [
+      {
+        "Size": 107147776,
+        "Digest": "sha256:804c6117a91f04a55afb6064bea76b72169c005fa8a7fe2a5e328a360b641ff9",
+        "DiffID": "sha256:922a5a00d724ecaf36d2d0f812e1340313ce7715b2b4629e4d90bcc32e4ade8e"
+      },
+      {
+        "Size": 1253376,
+        "Digest": "sha256:2ca8130b1368f1e4c7b9b841a3810b6696fac0f34023a0157623fa7949a93191",
+        "DiffID": "sha256:890818d8ed4454dcc1646d7ae3425940af9a6633eac483a2c938ed01d18ed9f0"
+      },
+      {
+        "Size": 14386176,
+        "Digest": "sha256:341ddb963c18488b6f4f6fbbea4653d668fb4f042a61d1fc8ec03182d841829c",
+        "DiffID": "sha256:7c49d014132defe1491efd2745d37ce2242d9cfbd6ca43fbf899caea4de718d0"
+      },
+      {
+        "Size": 2508800,
+        "Digest": "sha256:7d5670976b0a1b186681d87376b3303f3fc6de4fe2279b7f0bf66e6da0d62c13",
+        "DiffID": "sha256:1453f8f5a866ef093536258a812ace63ef047262c29de7fbede65b2114e6e83d"
+      },
+      {
+        "Size": 3314176,
+        "Digest": "sha256:c374076b877eb241126a1105e804e94d43db921ae376dde9b88fe98bb3e64c98",
+        "DiffID": "sha256:a692fb1f0232a7582f4e0ff486519fd8c2e38fc61f5451a03dadd73bbf543c5b"
+      },
+      {
+        "Size": 424448,
+        "Digest": "sha256:20403e0a64b55704b3ec70a64b803ec9b5a7112c93c7ee6d6db3474be498b9b6",
+        "DiffID": "sha256:c15228f7af52f8d47ad97e29a4a8883c4d3a51234dbadde49b8cb93c50d64bd2"
+      },
+      {
+        "Size": 21504,
+        "Digest": "sha256:64a72770a5e9f1f269d031da218c748333314de790e3bfcd6078d2bf59db06e1",
+        "DiffID": "sha256:6d18d5bc55e8eabc9b3e0d814640091c379d29c32f5cf7048c8db8bdf394161d"
+      },
+      {
+        "Size": 1024,
+        "Digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+        "DiffID": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      }
+    ]
+  },
+  "Results": [
+    {
+      "Target": "debian-openssl-fips:latest (debian 13.5)",
+      "Class": "os-pkgs",
+      "Type": "debian"
+    }
+  ]
+}

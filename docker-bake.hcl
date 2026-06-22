@@ -3,11 +3,11 @@ variable "REGISTRY" {
 }
 
 variable "OWNER" {
-  default = "atat69919-hub"
+  default = "taha2samy"
 }
 
 variable "REPO_NAME" {
-  default = "debian-13-fips"
+  default = "debian-openssl-fips"
 }
 
 group "default" {
@@ -38,7 +38,6 @@ target "debian-fips" {
     DEBIANUTILS_VER     = "${DEBIANUTILS_VER}"
     FINDUTILS_VER       = "${FINDUTILS_VER}"
     GCC_14_BASE_VER     = "${GCC_14_BASE_VER}"
-    GNU_WHICH_VER       = "${GNU_WHICH_VER}"
     GZIP_VER            = "${GZIP_VER}"
     LIBACL1_VER         = "${LIBACL1_VER}"
     LIBATTR1_VER         = "${LIBATTR1_VER}"
