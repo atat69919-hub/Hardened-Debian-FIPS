@@ -37,3 +37,18 @@ jobs:
             *.cache-from=type=gha,scope=trixie-fips
             *.cache-to=type=gha,scope=trixie-fips,mode=max
           push: true
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasec/trivy-action@v0.36.0
+        with:
+          image-ref: 'ghcr.io/${{ github.actor }}/debian-fips:latest'
+          format: 'json'
+          output: 'trivy-results.json'
+          exit-code: '0'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+
+      - name: Upload Trivy Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-vulnerability-report
+          path: trivy-results.json
