@@ -39,7 +39,7 @@ jobs:
           push: true
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasec/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: 'ghcr.io/${{ github.actor }}/debian-fips:latest'
           format: 'json'
