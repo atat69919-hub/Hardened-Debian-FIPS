@@ -70,7 +70,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     rm -f /etc/apt/apt.conf.d/docker-clean && \
     apt-get update && apt-get install -y --no-install-recommends \
     debootstrap \
-    ca-certificates
+    ca-certificates \
+    binutils
 
 WORKDIR /
 RUN debootstrap --variant=minbase trixie /rootfs http://deb.debian.org/debian/
@@ -124,19 +125,27 @@ RUN chroot /rootfs apt-get purge -y --auto-remove --allow-remove-essential \
     apt \
     libapt-pkg7.0
 
-RUN rm -rf /rootfs/usr/bin/dpkg* \
+RUN cp /rootfs/var/lib/dpkg/status /tmp/dpkg-status.save && \
+    rm -rf /rootfs/usr/bin/dpkg* \
            /rootfs/usr/sbin/dpkg* \
            /rootfs/var/lib/dpkg \
            /rootfs/etc/dpkg \
            /rootfs/usr/share/dpkg \
-           /rootfs/var/log/dpkg.log
+           /rootfs/var/log/dpkg.log && \
+    mkdir -p /rootfs/var/lib/dpkg && \
+    mv /tmp/dpkg-status.save /rootfs/var/lib/dpkg/status
 
 RUN rm -rf /rootfs/usr/share/doc/* \
            /rootfs/usr/share/man/* \
            /rootfs/usr/share/info/* \
+           /rootfs/usr/share/locale/* \
            /rootfs/var/lib/apt/lists/* \
            /rootfs/var/cache/apt/* \
-           /rootfs/var/log/*
+           /rootfs/var/log/* \
+           /rootfs/tmp/* \
+           /rootfs/var/tmp/*
+
+RUN find /rootfs/usr/bin /rootfs/usr/sbin /rootfs/usr/lib /rootfs/lib -type f -exec strip --strip-unneeded {} + 2>/dev/null || true
 
 FROM ${BASE_IMAGE} AS fips-builder
 USER root
