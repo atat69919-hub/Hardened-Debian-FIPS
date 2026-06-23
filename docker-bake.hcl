@@ -17,7 +17,10 @@ group "default" {
 target "debian-fips" {
   context    = "."
   dockerfile = "Dockerfile"
-  platforms  = ["linux/amd64", "linux/arm64"]
+  output = [
+    "type=image,push=true,compression=zstd,compression-level=3,force-compression=true"
+  ]
+  platforms  = ["linux/amd64"]
   cache-from = ["type=gha,scope=trixie-fips"]
   cache-to   = ["type=gha,scope=trixie-fips,mode=max"]
   tags       = [
