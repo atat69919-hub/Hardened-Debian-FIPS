@@ -1,5 +1,5 @@
 variable "BASE_IMAGE" {
-  default = "debian@sha256:4e401d95de7083948053197a9c3913343cd06b706bf15eb6a0c3ccd26f436a0e"
+  default = "debian@sha256:d7e12182ce18b85b93007c1dedf31f2d29e01ccf3182cc4017c709b6259bc132"
 }
 
 variable "ACL_VER" {
@@ -11,11 +11,11 @@ variable "ATTR_VER" {
 }
 
 variable "BASE_FILES_VER" {
-  default = "13.8+deb13u5"
+  default = "13.8+deb13u7"
 }
 
 variable "BASH_VER" {
-  default = "5.2.37-2+b9"
+  default = "5.2.37-2+b10"
 }
 
 variable "CA_CERTIFICATES_VER" {
@@ -55,7 +55,7 @@ variable "GNU_WHICH_VER" {
 }
 
 variable "GZIP_VER" {
-  default = "1.13-1"
+  default = "1.13-1+deb13u1"
 }
 
 variable "LIBACL1_VER" {
@@ -67,11 +67,11 @@ variable "LIBATTR1_VER" {
 }
 
 variable "LIBC6_VER" {
-  default = "2.41-12+deb13u3"
+  default = "2.41-12+deb13u4"
 }
 
 variable "LIBCAP2_VER" {
-  default = "1:2.75-10+deb13u1+b1"
+  default = "1:2.75-10+deb13u1+b3"
 }
 
 variable "LIBGCC_S1_VER" {
@@ -83,7 +83,7 @@ variable "LIBGMP10_VER" {
 }
 
 variable "LIBPCRE2_8_0_VER" {
-  default = "10.46-1~deb13u1"
+  default = "10.46-1~deb13u2"
 }
 
 variable "LIBSELINUX1_VER" {
@@ -119,7 +119,7 @@ variable "TAR_VER" {
 }
 
 variable "TZDATA_VER" {
-  default = "2026b-0+deb13u1"
+  default = "2026c-0+deb13u1"
 }
 
 variable "ZLIB1G_VER" {
